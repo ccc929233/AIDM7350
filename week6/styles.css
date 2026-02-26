@@ -1,0 +1,28 @@
+/* Place your CSS styles in this file */
+
+h1 {
+    color: red;
+    font-size: 30px;
+    background-color: green;
+}
+
+.standout{
+    color: coral;
+}
+
+.image1:hover{
+    border-radius: 50%;
+
+}
+.image2:hover{
+    opacity: 0.1;
+
+    
+}
+.image3:hover{
+    filter: blur(10px);
+    
+}
+.image4:hover{
+    filter:grayscale(0.5);
+}
