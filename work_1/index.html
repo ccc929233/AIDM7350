@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blender 3D 工作室</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Blender_badge_white.png/640px-Blender_badge_white.png" alt="Blender Logo">
+            <h1>Blender</h1>
+        </div>
+    </nav>
+
+    <!--加 id="vanta-bg" 供 JS 识别 -->
+    <section class="hero" id="vanta-bg">
+        <h2>Open source 3D creation kit</h2>
+        <p>Blender brings your imagination to life.</p>
+        <a href="https://www.blender.org/" target="_blank" class="btn">official website</a>
+    </section>
+
+    <section class="features">
+        <h2>select model</h2>
+        <div class="cards">
+            <div class="card" onclick="openModal('modal-1')">
+                <h3>software function</h3>
+                <img src="https://www.blender.org/wp-content/uploads/2019/07/blender_vfx-1280x720.jpg?x12104" alt="建模">
+                <p>It integrates modeling, sculpting, texturing, and lighting. It features powerful polygon modeling tools and an intuitive node editor</p>
+            </div>
+            <div class="card" onclick="openModal('modal-2')">
+                <h3>Video tutorial</h3>
+                <img src="course.avif" alt="动画与教程示意">
+                <p>A vast library of community tutorials covers from beginner to advanced levels. Learn keyframe animation and skeletal rigging.</p>
+            </div>
+            <div class="card" onclick="openModal('modal-3')">
+                <h3>Work display</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Big.Buck.Bunny.-.Frank.Bunny.png" alt="优秀作品展示">
+                <p>From the open-source film "Spring" to "The Big Rabbit," witness the cinematic realism brought by the Cycles renderer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 弹窗代码 -->
+    <!-- ========================================= -->
+
+    <div id="modal-1" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAllModals()">&times;</span>
+            <h2>What can a blender do?</h2>
+            <ul class="modal-list">
+                <li><strong>End-to-end creation process:</strong> From modeling to rendering and post-compositing, one software handles it all.</li>
+                <li><strong>Powerful engraving:</strong> It has a built-in sculpting module similar to ZBrush, making it suitable for creating high-precision character models.</li>
+                <li><strong>Combination of 2D animation:</strong> The unique Grease Pencil feature allows you to draw 2D animations in 3D space.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-2" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAllModals()">&times;</span>
+            <h2>Featured Tutorial Platform</h2>
+            <div class="link-box">
+                <a href="https://www.blender.org/support/tutorials/" target="_blank" class="modal-link">Official Basic Tutorial (English)</a>
+                <a href="https://search.bilibili.com/all?keyword=blender%E6%95%99%E7%A8%8B" target="_blank" class="modal-link">Bilibili Chinese Tutorial Library</a>
+                <a href="https://www.youtube.com/c/BlenderFoundation" target="_blank" class="modal-link">YouTube official channel</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-3" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content gallery-modal">
+            <span class="close-btn" onclick="closeAllModals()">&times;</span>
+            <h2>Excellent community works</h2>
+            <div class="gallery-grid">
+                <!-- 这里放了几个示例图片 -->
+                <img src="https://peach.blender.org/wp-content/uploads/bbb-splash.png" alt="Big Buck Bunny">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTM4ZDQ5NTEtMzUxOS00ODk3LThmNDQtNjg5N2MwMzg0ZDI1XkEyXkFqcGc@._V1_QL75_UX783_.jpg" alt="Agent 327">
+                <img src="https://m.media-amazon.com/images/M/MV5BNDlkZjRjMDgtZWQwZi00NDY0LWE2NjctMzJlODE4ZDNhNDgxXkEyXkFqcGc@._V1_QL75_UX777_.jpg" alt="Sintel">
+                <img src="data:image/jpeg;base64,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" alt="Cosmos Laundromat">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <footer>
+        <p>Introducing the open-source 3D software Blender | Chen Zitao</p>
+    </footer>
+
+    <!-- --- JS 脚本部分 --- -->
+    <!-- 引入 Three.js (Vanta 依赖) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <!-- 引入 Vanta Rings 效果 -->
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js"></script>
+    
+    <script>
+        // 确保页面加载完成后执行
+        window.addEventListener('DOMContentLoaded', () => {
+            VANTA.RINGS({
+                el: "#vanta-bg", // 对应上面 HTML 中的 ID
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                
+                // 【自定义颜色】配合 Blender 主题
+                backgroundColor: 0x000000, // 背景纯黑
+                color: 0xff4500            // 圆环颜色设为橙色
+            })
+        });
+    </script>
+
+</body>
+
+</html>

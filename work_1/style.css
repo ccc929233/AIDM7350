@@ -1,0 +1,374 @@
+/* =========================================
+   1. 全局初始化设置
+   ========================================= */
+
+/* 选中页面上所有的元素 */
+* {
+    margin: 0;              /* 清除所有元素默认的外边距 */
+    padding: 0;             /* 清除所有元素默认的内边距 */
+    box-sizing: border-box; /* 让元素的宽度计算包含边框和内边距*/
+}
+
+/* 设置整个网页身体的样式 */
+body {
+    font-family: 'Arial', sans-serif; /* 设置默认字体为 Arial，如果没有则用系统无衬线字体 */
+    background-color: #000;           /* 背景颜色设为纯黑 (#000) */
+    color: #fff;                      /* 文字颜色设为纯白 (#fff) */
+    line-height: 1.6;                 /* 行高设为字号的1.6倍（让文字阅读更舒适） */
+}
+
+/* =========================================
+   2. 导航栏样式 (顶部黑色条)
+   ========================================= */
+
+/* 导航栏容器 */
+nav {
+    background: rgba(0, 0, 0, 0.9);   /* 背景色：黑色，透明度0.9（稍微透一点底） */
+    padding: 15px 30px;               /* 内边距：上下15px，左右30px */
+    display: flex;                    /* 开启弹性布局（让里面的元素横向排列） */
+    justify-content: space-between;   /* 子元素分布：两端对齐（Logo在左，其他在右） */
+    align-items: center;              /* 子元素对齐：垂直居中 */
+    border-bottom: 2px solid #FF4500; /* 底部边框：2像素宽，实线，橙红色 */
+    position: relative;               /* 定位方式：相对定位（作为基准） */
+    z-index: 100;                     /* 层级：设为100（确保导航栏永远浮在最上面，不被动画遮挡） */
+}
+
+/* Logo 区域的容器 */
+.logo { 
+    display: flex;            /* 开启弹性布局（让图片和文字横排） */
+    align-items: center;      /* 垂直居中对齐 */
+    gap: 10px;                /* 图片和文字之间的间距为10px */
+}
+
+/* Logo 图片 */
+.logo img { 
+    height: 40px;             /* 固定图片高度为40px*/
+}
+
+/* Logo 文字标题 */
+.logo h1 {
+    color: #FF4500;                    /* 文字颜色：橙红色 */
+    font-family: 'Orbitron', sans-serif; /* 字体：使用科技感字体 Orbitron */
+    font-size: 1.8em;                  /* 字号：父元素字号的1.8倍 */
+    text-transform: uppercase;         /* 文字转换：全部变为大写 */
+    letter-spacing: 1px;               /* 字间距：每个字母之间增加1px空隙 */
+}
+
+/* =========================================
+   3. Hero Section 
+   ========================================= */
+
+.hero {
+    text-align: center;                /* 文字对齐：居中 */
+    padding: 150px 20px;               /* 内边距：上下150px（拉高区域），左右20px */
+    
+    /* 背景设为透明，这样可以看到后面的粒子动画或深色底色 */
+    background: transparent; 
+    
+    position: relative;                /* 定位方式：相对定位（作为内部绝对定位元素的参考点） */
+    overflow: hidden;                  /* 溢出隐藏：防止粒子动画飘出这个区域外面去 */
+    
+}
+
+/* 让标题、段落和按钮浮在动画层之上 */
+.hero h2, .hero p, .hero .btn {
+    position: relative;                /* 相对定位 */
+    z-index: 10;                       /* 层级：设为10（高于背景的粒子动画） */
+    pointer-events: none;              /* 鼠标事件：设为无（让鼠标可以穿透文字直接操作背景，除非单独开启） */
+}
+
+/* 专门针对按钮：恢复鼠标点击功能 */
+.hero .btn {
+    pointer-events: auto;              /* 鼠标事件：自动（允许点击按钮） */
+}
+
+/* 主标题 (H2) */
+.hero h2 {
+    font-family: 'Orbitron', sans-serif; /* 字体：科技感字体 */
+    font-size: 3.5em;                    /* 字号：非常大 */
+    margin-bottom: 20px;                 /* 下外边距：与下方文字拉开距离 */
+    color: #fff;                         /* 颜色：白色 */
+    text-shadow: 0 0 20px rgba(0,0,0,0.8); /* 文字阴影：黑色模糊阴影（增加对比度，让字在动画上更清晰） */
+}
+
+/* 副标题/描述段落 (P) */
+.hero p {
+    font-size: 1.2em;                    /* 字号：稍大 */
+    max-width: 700px;                    /* 最大宽度：限制在一行700px内（防止太宽难读） */
+    margin: 0 auto 30px;                 /* 外边距：上下0和30px，左右auto（实现水平居中） */
+    color: #eee;                         /* 颜色：浅灰色（比纯白柔和一点） */
+    text-shadow: 0 0 10px rgba(0,0,0,0.8); /* 文字阴影：轻微黑色阴影 */
+}
+
+/* “访问官网”按钮样式 */
+.btn {
+    background-color: #FF4500;           /* 背景色：橙红色 */
+    color: white;                        /* 文字颜色：白色 */
+    padding: 12px 30px;                  /* 内边距：上下12px，左右30px，变胖*/
+    text-decoration: none;               /* 去掉链接默认的下划线 */
+    border-radius: 5px;                  /* 圆角：5px（让按钮四个角变圆润） */
+    font-weight: bold;                   /* 字体粗细：加粗 */
+    display: inline-block;               /* 显示模式：行内块（既能横排又能设置宽高） */
+    border: 2px solid #FF4500;           /* 边框：2px橙红色实线 */
+    transition: all 0.3s;                /* 过渡动画：所有属性变化在0.3秒内完成（产生平滑效果） */
+    font-family: 'Orbitron', sans-serif; /* 字体：科技感字体 */
+    cursor: pointer;                     /* 鼠标形状：变成小手（提示可点击） */
+}
+
+/* 按钮悬停（鼠标放上去）时的效果 */
+.btn:hover {
+    background-color: transparent;       /* 背景变透明 */
+    box-shadow: 0 0 15px #FF4500;        /* 发光效果：橙色光晕 */
+    transform: scale(1.05);              /* 变换：放大1.05倍 */
+}
+
+/* =========================================
+   4. 功能展示区域 (Features)
+   ========================================= */
+
+/* 功能区域整体容器 */
+.features { 
+    padding: 60px 20px;                  /* 内边距：上下60px，左右20px */
+    text-align: center;                  /* 文字居中 */
+    background: #050505;                 /* 背景色：非常深的灰黑色（区别于纯黑背景） */
+
+    background-image: 
+        linear-gradient(rgba(154, 8, 8, 0.462) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(154, 8, 8, 0.462)1px, transparent 1px);
+    background-size: 40px 40px; /* 网格大小 */
+
+    /* 添加一个暗角遮罩，让网格只在中间亮，四周暗下去 */
+    box-shadow: inset 0 0 300px #000;
+
+}
+
+/* 功能区的标题 */
+.features h2 { 
+    font-family: 'Orbitron', sans-serif;/* 字体：科技感字体 */
+    font-size: 2.5em;/* 字号：2倍大 */
+    margin-bottom: 60px;/* 下外边距：与下方内容拉开距离 */
+    text-transform: uppercase;/* 文字转换：全部变为大写 */
+    letter-spacing: 2px;/* 字间距：每个字母之间增加2px空隙 */
+    
+    /* 文字渐变色：橙色到白色 */
+    background: linear-gradient(to right, #FF4500, #ff9a76);
+    -webkit-background-clip: text;/* 背景色：文字背景透明 */
+    color: transparent;/* 文字颜色：透明（显示背景渐变） */
+    
+    /* 发光效果 */
+    filter: drop-shadow(0 0 10px rgba(255, 68, 0, 0.685));                   /* 字号：2倍大 */
+}
+
+/* 卡片容器（包裹三个卡片） */
+.cards { 
+    display: flex;                       /* 弹性布局：让卡片横排 */
+    justify-content: center;             /* 主轴对齐：居中 */
+    gap: 90px;                           /* 间距：卡片之间空30px */
+    flex-wrap: wrap;                     /* 换行：如果屏幕窄，自动换到下一行 */
+}
+
+/* 单个卡片样式 */
+.card {
+    width: 320px;
+    background: rgba(30, 30, 30, 0.6); /* 半透明黑 */
+    backdrop-filter: blur(10px);        /* 磨砂效果 */
+
+    
+    
+    border-radius: 15px;                 /* 圆角：10px */
+    overflow: hidden;                    /* 溢出隐藏：防止图片超出圆角范围 */
+    position: relative;
+    transition: all 0.4s ease;          /* 过渡动画：位置变化耗时0.3秒 */
+    
+
+    border: 1px solid #333;              /* 边框：1px 浅灰色 */
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.1); /* 阴影：微弱的橙色光晕 */
+    
+}
+
+/* 卡片悬停（鼠标放上去）的效果 */
+.card:hover { 
+    transform: translateY(-15px);        /* 变换：向上移动10px（浮起效果） */
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 69, 0, 0.2); /* 橙色外发光 */
+    border-color: #FF4500;/* 边框颜色变为橙红色 */
+}
+
+
+
+/* 卡片内的图片 */
+.card img { 
+    width: 100%;                         /* 宽度：占满卡片宽度 */
+    height: 180px;                       /* 高度：固定180px */
+    object-fit: cover;                   /* 填充模式：裁剪覆盖（保持比例填满，不变形） */
+}
+
+
+
+/* 卡片标题 (H3) */
+.card h3 { 
+    color: #FF4500;                      /* 颜色：橙红色 */
+    padding: 15px;                       /* 内边距：四周15px */
+    font-family: 'Orbitron', sans-serif; /* 字体：科技感字体 */
+}
+
+/* 给标题加个小装饰线 */
+.card h3::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #FF4500;
+    margin-top: 8px;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.card:hover h3::after {
+    width: 100%; /* 悬停时线条拉长 */
+}
+
+/* 卡片描述文字 (P) */
+.card p { 
+    color: #aaa;                         /* 颜色：中灰色 */
+    padding: 0 15px 15px;                /* 内边距：上0，左右15，下15 */
+    font-size: 0.9em;                    /* 字号：稍小 */
+}
+
+/* =========================================
+   5. 页脚 (Footer)
+   ========================================= */
+
+footer { 
+    text-align: center;                  /* 文字居中 */
+    padding: 30px;                       /* 内边距：30px */
+    background: #111;                    /* 背景色：深灰色 */
+    color: #555;                         /* 文字颜色：深灰色（低调） */
+    font-size: 0.8em;                    /* 字号：较小 */
+    border-top: 1px solid #333;          /* 顶部边框：1px 浅灰色（分割线） */
+}
+
+
+/* ==================== 弹窗样式开始 ==================== */
+
+/* 1. 遮罩层：全屏黑色半透明背景 */
+.modal-overlay {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定在屏幕上，不随滚动条滚动 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* 深黑背景，突出弹窗 */
+    z-index: 1000; /* 保证在所有层级最上面 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    backdrop-filter: blur(5px); /* 背景模糊效果 */
+}
+
+/* 2. 弹窗主体盒子 */
+.modal-content {
+    background: #1a1a1a; /* 深灰背景 */
+    width: 90%;
+    max-width: 600px; /* 最大宽度 */
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #FF4500; /* 橙色边框 */
+    box-shadow: 0 0 30px rgba(255, 69, 0, 0.3); /* 橙色发光 */
+    position: relative;
+    text-align: left;
+    color: #eee;
+    
+    /* 简单的出现动画 */
+    animation: zoomIn 0.3s ease;
+}
+
+/* 弹窗出现的动画定义 */
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* 3. 关闭按钮 (右上角的 X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #FF4500; /* 悬停变橙色 */
+}
+
+/* 4. 弹窗内的标题 */
+.modal-content h2 {
+    color: #FF4500;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* --- 针对弹窗 1：列表样式 --- */
+.modal-list li {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    list-style: none; /* 去掉默认圆点 */
+    position: relative;
+    padding-left: 20px;
+}
+.modal-list li::before {  /* 列表前的图标 */
+    content: '>'; /* 用大于号做列表头 */
+    color: #FF4500;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+.modal-list li strong{
+    color: #ff4400dc; /* 强调的文字颜色 */
+}
+
+/* --- 针对弹窗 2：链接按钮样式 --- */
+.link-box {
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    gap: 15px;
+}
+.modal-link {
+    display: block;
+    background: #222;
+    color: #fff;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    border-left: 4px solid #FF4500;
+    transition: all 0.3s;
+}
+.modal-link:hover {
+    background: #333;
+    padding-left: 25px; /* 悬停时稍微右移 */
+}
+
+/* --- 针对弹窗 3：图片网格样式 --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 两列 */
+    gap: 15px;
+}
+.gallery-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    border: 1px solid #333;
+}
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    border-color: #FF4500;
+}
